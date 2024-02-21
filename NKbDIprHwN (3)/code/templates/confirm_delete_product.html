@@ -1,0 +1,16 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+<a href="{{ url_for('manager_page', managername=session['manager']) }}" class="btn btn-secondary">Back</a>
+
+<div class="container mt-4">
+    <h2>Confirm Delete Product</h2>
+    <hr>
+    <p>Are you sure you want to delete the product "{{ product.name }}"?</p>
+    <form action="{{ url_for('confirm_delete_product', product_id=product.id) }}" method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{{ url_for('manager_page', managername=session['manager']) }}" class="btn btn-success">Cancel</a>
+    </form>
+</div>
+{% endblock %}

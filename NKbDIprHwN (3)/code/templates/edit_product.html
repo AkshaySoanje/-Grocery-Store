@@ -1,0 +1,44 @@
+{% extends 'home.html' %}
+{% block content %}
+
+<a href="{{ url_for('manager_page', managername=session['manager']) }}" class="btn btn-secondary">Back</a>
+
+<div class="container">
+    <h2>Edit Product</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="product_name">Product Name:</label>
+            <input type="text" class="form-control" id="product_name" name="product_name" value="{{ product.name }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="product_price">Price:</label>
+            <input type="number" class="form-control" id="product_price" name="product_price" value="{{ product.price }}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="stock">Stock :</label>
+            <input type="number" class="form-control" id="stock" name="stock" value="{{ product.stock }}" required>
+        </div>
+        <div class="form-group">
+            <label for="product_description">Description:</label>
+            <textarea class="form-control" id="product_description" name="product_description" rows="4">{{ product.description }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="product_category">Category:</label>
+
+            <select class="form-control" id="product_category" name="product_category">
+                {% for category in sections %}
+                    <option value="{{ category.id }}" {% if product.section_id == category.id %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+
+{% block content %}
+    {% with massage = get_flashed_messages() %}
+        {% if massage %}
+            <div class = 'mt-3'>
+                <div class = "alert alert-primary">
+                {{massage}}
+                </div>
+            </div>
+        {% endif%}
+
+    {% endwith %}
+<a href="{{ url_for('manager_page', managername=session['manager']) }}" class="btn btn-secondary">Back</a>
+
+<div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+    <div style="text-align: center;">
+        <h2>Add New Section</h2>
+        <form action="{{ url_for('add_section') }}" method="post">
+            <div class="form-group">
+                <label for="section_name">Section Name:</label>
+               
+                <input type="text" class="form-control" id="section_name" name="section_name" required>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Add Section</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}

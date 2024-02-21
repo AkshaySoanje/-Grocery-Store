@@ -1,0 +1,49 @@
+{% extends 'home.html'%}
+
+{% block content%}
+        <div class="container">
+          <div class = "row justify-content-center">
+            <div class = 'col-md-6'>
+              <form method = "POST" action = "/manager_register">
+                <br>
+                <h2> Register Manager </h2>
+                <br>
+                <div class="mb-3">
+                  <label for="username" class="form-label">Manager Name</label>
+                  <input type="text" class="form-control" name="managername" placeholder="Enter Manager Name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="store" class="form-label">Enter store name</label>
+                    <input type="text" class="form-control" name="store" placeholder="Enter Store Name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="mobile" class="form-label">Enter Mobile Number</label>
+                    <input type="text" class="form-control" name="mobile" placeholder="Enter Mobile Number" required>
+                </div>
+
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Create Password</label>
+                  <input type="password" class="form-control" name="password" placeholder = "Enter Password" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Login</button>
+
+
+              </form>
+              {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                  <ul class="flashes">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endwith %}
+
+            </div>
+
+          </div>
+        </div>
+      {% endblock%}

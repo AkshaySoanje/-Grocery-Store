@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<a href="{{ url_for('manager_page', managername=session['manager']) }}" class="btn btn-secondary">Back</a>
+
+<div class="container">
+    <h2>Confirm Delete Section</h2>
+    <form method="post" action = "/confirm_delete_section">
+        <div class="form-group">
+            <label for="section_name">Select Section to Delete:</label>
+            <select class="form-control" id="section_name" name="section_id">
+                {% for section in sections %}
+                <option value="{{ section.id }}">{{ section.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete Section</button>
+    </form>
+</div>
+
+
+{% endblock %}

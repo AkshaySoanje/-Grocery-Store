@@ -1,0 +1,34 @@
+{% extends 'home.html'%}
+
+{% block content %}
+
+<a href="{{ url_for('manager_page', managername=session['manager']) }}" class="btn btn-secondary">Back</a>
+
+
+<div class="container">
+    <h2>Edit Section</h2>
+    <form method="post" action = '/edit_section'>
+        <div class="form-group">
+            <label for="section_name">Select Section to Edit:</label>
+            <select class="form-control" id="section_name" name="section_id">
+                {% for section in sections %}
+                <option value="{{ section.id }}">{{ section.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="new_section_name">New Section Name:</label>
+            <input type="text" class="form-control" id="new_section_name" name="new_section_name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Section</button>
+    </form>
+
+    {% if section %}
+    <hr>
+    <h3>Selected Section Information</h3>
+    <p>Section ID: {{ section.id }}</p>
+    <p>Current Section Name: {{ section.name }}</p>
+    {% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+
+{% block content %}
+<div class="col-md-12">
+    <a href="{{ url_for('user_home', username=session['user']) }}" class="btn btn-secondary">Back to Home</a>
+</div>
+        <div class="container mt-4">
+                <h2>Search Results for "{{ search_name }}"</h2>
+            <div class="row">
+                    {% for product in products %}
+                    <div class="col-md-4 mb-4">
+                        <div class="card w-75">
+                            <img src="{{url_for('static', filename = product.id ~ ".png")}}" class= "card-img-top m-auto" alt = "product img" style="width: 250px; height: 200px;object-fit: cover;">
+                            <div class="card-body" style="  display :block;">
+                                <h5 class="card-title">{{ product.name }}</h5>
+                                <p class="card-text">Price: Rs. {{ product.price }}</p>
+                                <p class="card-text"> {{ product.description }}</p>
+
+                                {% if product.stock > 0 %}
+                                <p class="card-text text-success">In Stock , {{product.stock}}</p>
+                                {% else %}
+                                <p class="card-text text-danger">Out of Stock</p>
+                                {% endif %}
+                                <form method="POST" action="/add_to_cart">
+                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" name="quantity" value="1" min="1" max="99">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">Qty</span>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+    </div>
+</div>
+{% endblock %}
